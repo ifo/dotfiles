@@ -11,13 +11,14 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 # install brew cask
 brew install caskroom/cask/brew-cask
 
-# install homebrew things, including brew cask
+# install homebrew things
 brew install \
   bash-completion \
   git \
   go \
   python \
   reattach-to-user-namespace \
+  rethinkdb \
   ag \
   tig \
   tmux \
@@ -26,7 +27,8 @@ brew install \
 # brew cask install things
 brew cask install \
   firefox \
-  iterm2
+  iterm2 \
+  google-chrome
 
 # set global git configs
 git config --global user.name "Steve McCarthy"
@@ -43,6 +45,17 @@ ln -s ~/dotfiles/tmux.conf    .tmux.conf
 mkdir .vim
 mkdir .vim/vimbackups
 mkdir .vim/vimswaps
+# get and install vim plugins
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+
+# extra tmux setup
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+tmux source ~/.tmux.conf
+# TODO figure out how to install tmux plugins in this script
+
+# source new .bash_profile
+source ~/.bash_profile
 
 # print reminders
 echo "
