@@ -112,4 +112,7 @@ Press CMD+SHIFT+H to enter your Home folder in Finder, then press CMD+ArrowUp to
 
 #### Spotlight
 - turn off bing searches
+
+#### Facetime
+- turn off iphone calls
 "
