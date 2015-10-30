@@ -32,6 +32,7 @@ Plugin 'vim-scripts/trailing-whitespace'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'raichoo/haskell-vim'
 Plugin 'fatih/vim-go'
+Plugin 'christoomey/vim-tmux-navigator'
  " clojure
 Plugin 'guns/vim-clojure-static'
 Plugin 'kien/rainbow_parentheses.vim'
