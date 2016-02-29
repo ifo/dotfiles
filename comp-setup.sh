@@ -16,9 +16,15 @@ brew install \
   bash-completion \
   git \
   go \
+  hugo \
+  keybase \
+  node \
+  postgres \
   python \
+  python3 \
   reattach-to-user-namespace \
   rethinkdb \
+  sqlite \
   ag \
   tig \
   tmux \
@@ -26,9 +32,14 @@ brew install \
 
 # brew cask install things
 brew cask install \
+  disk-inventory-x \
   firefox \
+  flux \
+  google-chrome \
+  gpgtools \
   iterm2 \
-  google-chrome
+  mactex \
+  vlc
 
 # set global git configs
 git config --global user.name "Steve McCarthy"
