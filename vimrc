@@ -53,6 +53,9 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
 au FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
 let g:pyindent_open_paren = '&sw'
 
+  " spell check and wrap at 80 characters in text and markdown files
+autocmd BufNew,BufNewFile,BufRead *.txt,*.text,*.md,*.markdown :set spell tw=80
+
   " easier fold toggling
 nnoremap <space> za
 
