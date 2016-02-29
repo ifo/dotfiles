@@ -41,3 +41,6 @@ export ANSIBLE_INVENTORY=~/dev/ansible/ansible_inventory
 
 # ignore duplicates in history
 export HISTCONTROL=ignoredups
+
+# why yes I do use Go
+export GO15VENDOREXPERIMENT=1
