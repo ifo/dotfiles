@@ -1,9 +1,3 @@
-# Alias ll
-alias ll="ls -alGh"
-
-# Color grep
-alias grep='grep --color=auto'
-
 # Color bash prompt
 export PS1="\[\e[1;30;47m\]\h:\W \u\$\[\e[0m\] "
 
@@ -27,14 +21,6 @@ PS1='\[\033[01;34m\]$(__pwd_ps1)$(__git_ps1 " \[\033[01;31m\](%s)")$\[\033[00m\]
 export GOPATH=$HOME/dev/go
 export PATH=$PATH:$GOPATH/bin
 
-# Add shortened tmux new command
-alias tmn='tmux new -s $1'
-
-# Add tmux bash completion
-alias tma='tmux attach -t $1'
-if [ -f /usr/local/etc/bash_completion.d/tma ]; then
-  . /usr/local/etc/bash_completion.d/tma
-fi
 
 # ansible inventory file
 export ANSIBLE_INVENTORY=~/dev/ansible/ansible_inventory
@@ -44,3 +30,28 @@ export HISTCONTROL=ignoredups
 
 # why yes I do use Go
 export GO15VENDOREXPERIMENT=1
+
+###
+# aliases
+###
+
+# Add shortened tmux new command
+alias tmn='tmux new -s $1'
+
+# Add tmux bash completion
+alias tma='tmux attach -t $1'
+if [ -f /usr/local/etc/bash_completion.d/tma ]; then
+  . /usr/local/etc/bash_completion.d/tma
+fi
+
+# Alias ll
+alias ll="ls -alGh"
+
+# Color grep
+alias grep='grep --color=auto'
+
+# Go aliases
+alias gb="go build"
+alias gt="go test"
+alias gtv="go test -v"
+alias gtvr="go test -v -race"
