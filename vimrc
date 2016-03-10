@@ -16,8 +16,7 @@ Plugin 'raichoo/haskell-vim'
 Plugin 'fatih/vim-go'
 
   " autocomplete
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
 
   " style
 Plugin 'vim-scripts/trailing-whitespace'
