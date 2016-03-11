@@ -55,9 +55,6 @@ let g:pyindent_open_paren = '&sw'
   " spell check and wrap at 80 characters in text and markdown files
 autocmd BufNew,BufNewFile,BufRead *.txt,*.text,*.md,*.markdown :set spell tw=80
 
-  " easier fold toggling
-nnoremap <space> za
-
   " remove error bells
 set noeb vb t_vb=
 au GUIEnter * set vb t_vb=
@@ -85,9 +82,6 @@ set mouse=a
   " enable clipboard support
 set clipboard=unnamed
 
-  " setup NERDTree hotkey
-map <F2> :NERDTreeTabsToggle<CR>
-
   " make tabs easier to navigate
 map <C-l> :tabn<CR>
 map <C-h> :tabp<CR>
@@ -95,6 +89,9 @@ map <C-n> :tabnew<CR>
 
   " highlight search
 set hlsearch
+
+  " case insensitive search
+set ignorecase
 
   " clear search highlight with esc
 nnoremap <return> :noh<return><return>
