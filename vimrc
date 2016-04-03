@@ -90,8 +90,8 @@ map <C-n> :tabnew<CR>
   " highlight search
 set hlsearch
 
-  " case insensitive search
-set ignorecase
+  " case insensitive search when all lowercase
+set smartcase
 
   " clear search highlight with esc
 nnoremap <return> :noh<return><return>
