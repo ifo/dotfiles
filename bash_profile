@@ -47,6 +47,11 @@ fi
 # Alias ll
 alias ll="ls -alGh"
 
+# cd lists directory contents
+function cd {
+  builtin cd "$@" && ll
+}
+
 # Color grep
 alias grep='grep --color=auto'
 
