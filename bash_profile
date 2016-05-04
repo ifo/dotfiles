@@ -7,6 +7,9 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
+# Turn off homebrew analytics
+export HOMEBREW_NO_ANALYTICS=1
+
 # Color bash prompt
 PS1_PWD_MAX=15
 __pwd_ps1() { echo -n $PWD | sed -e "s|${HOME}|~|" -e "s|\(/[^/]*/\).*\(/.\{${PS1_PWD_MAX}\}\)|\1...\2|"; }

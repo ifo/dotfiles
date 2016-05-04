@@ -8,6 +8,9 @@ xcode-select --install # a popup will happen which will install them
 # install homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# turn off homebrew analytics
+brew analytics off
+
 # install brew cask
 brew install caskroom/cask/brew-cask
 
