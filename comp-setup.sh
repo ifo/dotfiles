@@ -84,7 +84,10 @@ echo "
 Trackpad Enable
 - Point & Click
 	- Tap to click
-	- Three finger drag
+Accessibility
+- Trackpad Options...
+  - Enable dragging
+    - Three finger drag
 Trackpad Disable
 - More Gestures
 	- Swipe between pages
