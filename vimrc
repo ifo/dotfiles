@@ -14,6 +14,8 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'raichoo/haskell-vim'
 Plugin 'fatih/vim-go'
+Plugin 'nvie/vim-flake8'
+Plugin 'tell-k/vim-autopep8'
 
   " autocomplete
 Plugin 'Valloric/YouCompleteMe'
@@ -101,3 +103,10 @@ nnoremap <return> :noh<return><return>
 set colorcolumn=80
 "hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 hi ColorColumn cterm=underline ctermbg=none
+
+  " autopep8 config
+let g:autopep8_disable_show_diff=1
+
+  " autorun on python files
+"autocmd BufWritePost *.py call Autopep8()
+"autocmd BufWritePost *.py call Flake8()
