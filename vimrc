@@ -54,6 +54,9 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
 au FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
 let g:pyindent_open_paren = '&sw'
 
+  " set different spacing for tsvs
+autocmd BufRead,BufNewFile *.tsv setlocal tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+
   " spell check and wrap at 80 characters in text and markdown files
 autocmd BufNew,BufNewFile,BufRead *.txt,*.text,*.md,*.markdown :set spell tw=80
 
@@ -106,6 +109,9 @@ hi ColorColumn cterm=underline ctermbg=none
 
   " autopep8 config
 let g:autopep8_disable_show_diff=1
+
+  " enable goimports
+let g:go_fmt_command = "goimports"
 
   " autorun on python files
 "autocmd BufWritePost *.py call Autopep8()
