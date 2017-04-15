@@ -40,6 +40,7 @@ export GO15VENDOREXPERIMENT=1
 
 # Add shortened tmux new command
 alias tmn='tmux new -s $1'
+alias tml='tmux ls'
 
 # Add tmux bash completion
 alias tma='tmux attach -t $1'
