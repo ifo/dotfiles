@@ -64,3 +64,9 @@ alias gb='go build'
 alias gt='go test'
 alias gtv='go test -v'
 alias gtvr='go test -v -race'
+
+# nvim
+alias n='nvim'
+
+# terminal colors
+export TERM=xterm-256color
