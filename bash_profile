@@ -49,7 +49,7 @@ if [ -f /usr/local/etc/bash_completion.d/tma ]; then
 fi
 
 # Alias ll
-alias ll="ls -alGh"
+alias ll='ls -alGh'
 
 # cd lists directory contents
 function cd {
@@ -60,7 +60,7 @@ function cd {
 alias grep='grep --color=auto'
 
 # Go aliases
-alias gb="go build"
-alias gt="go test"
-alias gtv="go test -v"
-alias gtvr="go test -v -race"
+alias gb='go build'
+alias gt='go test'
+alias gtv='go test -v'
+alias gtvr='go test -v -race'
