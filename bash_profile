@@ -23,6 +23,7 @@ PS1='\[\033[01;34m\]$(__pwd_ps1)$(__git_ps1 " \[\033[01;31m\](%s)")$\[\033[00m\]
 # Add go path
 export GOPATH=$HOME/dev/go
 export PATH=$PATH:$GOPATH/bin
+export GOBIN=$GOPATH/bin
 
 
 # ansible inventory file

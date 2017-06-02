@@ -7,23 +7,40 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
   " languages
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
 
+  " code linting and formatting
+Plug 'vim-syntastic/syntastic'
+Plug 'sbdchd/neoformat'
+
   " autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" deoplete-go (for gocode completion support)
-" https://github.com/zchee/deoplete-go
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+  " deoplete-go (for gocode completion support)
+  " https://github.com/zchee/deoplete-go
+  " Requires docker, I think?
+"Plug 'zchee/deoplete-go', { 'do': 'make'}
 
   " navigation
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdtree'
+Plug 'fholgado/minibufexpl.vim'
+
+  " status bar mods
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+
+  " fuzzy finder
+"Plug 'cloudhead/neovim-fuzzy'
 
   " Initialize plugin system
 call plug#end()
+
+  " Use deoplete.
+call deoplete#enable()
 
   " line numbers
 set number
@@ -61,26 +78,15 @@ set ignorecase
 set smartcase
 
   " colorscheme
-  " base16
-"let base16colorspace=256  " Access colors present in 256 colorspace
-"colorscheme base16-default-dark
-  " molokai
-let g:rehash256 = 1
-"let g:molokai_original = 1
-colorscheme molokai
-  " gruvbox
-"set background=dark
-"set termguicolors
-"colorscheme gruvbox
-  " github
-"set background=dark
-"colorscheme github
+  " torte
+colorscheme torte
 
   " clear search highlight with esc
 nnoremap <return> :noh<return><return>
 
   " highlight column number 80
 set colorcolumn=80
+"hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 hi ColorColumn cterm=underline ctermbg=none
 
   " NERDTree
@@ -101,3 +107,43 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources#go#use_cache = 1
   " Tab completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+  " Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_javascript_checkers = ["eslint"]
+
+let g:syntastic_python_checkers = ['python']
+
+  " neoformat
+if getcwd() =~ '/mott-ui\(/\|$\)'
+  set shiftwidth=2
+  set softtabstop=2
+  set tabstop=2
+
+  let g:neoformat_javascript_prettier = {
+        \ 'exe': 'prettier',
+        \ 'args': ['--stdin', '--single-quote', '--parser flow', '--print-width 100'],
+        \ 'stdin': 1,
+        \ }
+  autocmd BufWritePre *.js Neoformat
+endif
+
+  " Airline
+set laststatus=2
+
+  " enable mouse support
+set mouse=a
+
+  " fuzzy findery
+"nnoremap <silent> <C-o> :FuzzyOpen<CR>
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-s> :Ag<CR>
+"nnoremap <silent> <C-p> :FZF<CR>
