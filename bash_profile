@@ -71,3 +71,6 @@ alias n='nvim'
 
 # terminal colors
 export TERM=xterm-256color
+
+# ensure homebrew api token isn't set
+unset HOMEBREW_GITHUB_API_TOKEN

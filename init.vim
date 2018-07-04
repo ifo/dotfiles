@@ -12,12 +12,15 @@ Plug 'junegunn/fzf.vim'
   " languages
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
+Plug 'flowtype/vim-flow'
 
   " code linting and formatting
 Plug 'vim-syntastic/syntastic'
 Plug 'sbdchd/neoformat'
 
   " autocomplete
+
+  "Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " deoplete-go (for gocode completion support)
   " https://github.com/zchee/deoplete-go
@@ -44,6 +47,7 @@ call deoplete#enable()
 
   " line numbers
 set number
+set relativenumber
 
   " highlight the current line
 set cursorline
@@ -56,6 +60,9 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
 
   " spell check and wrap at 80 characters in text and markdown files
 autocmd BufNew,BufNewFile,BufRead *.txt,*.text,*.md,*.markdown :set spell tw=80
+
+  " set html type for .tmpl files
+autocmd BufNewFile,BufRead *.tmpl set syntax=html
 
   " make central swap folder
 set directory=~/.config/nvim/nvimswaps//
@@ -89,6 +96,9 @@ set colorcolumn=80
 "hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 hi ColorColumn cterm=underline ctermbg=none
 
+  " highlight column number 100 for golang
+autocmd BufNew,BufNewFile,BufRead *.go :set colorcolumn=100
+
   " NERDTree
 map <C-n> :NERDTreeToggle<CR>
   " Auto start NERD tree when opening a directory
@@ -118,22 +128,14 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_javascript_checkers = ["eslint"]
-
-let g:syntastic_python_checkers = ['python']
-
-  " neoformat
-if getcwd() =~ '/mott-ui\(/\|$\)'
-  set shiftwidth=2
-  set softtabstop=2
-  set tabstop=2
-
-  let g:neoformat_javascript_prettier = {
-        \ 'exe': 'prettier',
-        \ 'args': ['--stdin', '--single-quote', '--parser flow', '--print-width 100'],
-        \ 'stdin': 1,
-        \ }
-  autocmd BufWritePre *.js Neoformat
+  " set directory specific commands here
+if getcwd() =~ '/example_base_dir\(/\|$\)'
+    " instead use 4 spaces
+  set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
+    " set a specific checker, like js
+  let g:syntastic_javascript_checkers = ['eslint']
+  let g:syntastic_javascript_eslint_exec='/usr/bin/eslint'
+  let g:syntastic_javascript_eslint_args='--config ' . expand($HOME) . "/.eslintrc"
 endif
 
   " Airline
@@ -147,3 +149,28 @@ set mouse=a
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-s> :Ag<CR>
 "nnoremap <silent> <C-p> :FZF<CR>
+
+"  " deocomplete stuff
+"" Plugin key-mappings.
+"inoremap <expr><C-g>     neocomplete#undo_completion()
+"inoremap <expr><C-l>     neocomplete#complete_common_string()
+"
+"" Recommended key-mappings.
+"" <CR>: close popup and save indent.
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+"  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+"  " For no inserting <CR> key.
+"  "return pumvisible() ? "\<C-y>" : "\<CR>"
+"endfunction
+"" <TAB>: completion.
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"" Close popup by <Space>.Plug 'fholgado/minibufexpl.vim'
+""inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+  " shortcut to copy clipboard to parent system clipboard
+  " this is only for use on a remote system
+nnoremap <silent> <C-y> :call system('ssh self pbcopy', @0)<CR>
