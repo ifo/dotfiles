@@ -1,0 +1,7 @@
+{
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "editor.tabSize": 2,
+    "editor.cursorBlinking": "solid",
+    "vim.hlsearch": true
+}
