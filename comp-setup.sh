@@ -1,77 +1,51 @@
 # A bash script to install all the things
+set -e
 
-cd # go to home directory
+# macOS install
+macos_setup () {
+  # install command line tools
+  xcode-select --install # a popup will happen which will install them
 
-# install command line tools
-xcode-select --install # a popup will happen which will install them
+  # install homebrew
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# install homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  # turn off homebrew analytics
+  brew analytics off
 
-# turn off homebrew analytics
-brew analytics off
+  # install brew cask
+  brew install caskroom/cask/brew-cask
 
-# install brew cask
-brew install caskroom/cask/brew-cask
+  # install homebrew things
+  brew install \
+    bash-completion \
+    git \
+    go \
+    hugo \
+    keybase \
+    node \
+    postgres \
+    python \
+    python3 \
+    reattach-to-user-namespace \
+    rethinkdb \
+    sqlite \
+    ag \
+    tig \
+    tmux \
+    vim
 
-# install homebrew things
-brew install \
-  bash-completion \
-  git \
-  go \
-  hugo \
-  keybase \
-  node \
-  postgres \
-  python \
-  python3 \
-  reattach-to-user-namespace \
-  rethinkdb \
-  sqlite \
-  ag \
-  tig \
-  tmux \
-  vim
+  # brew cask install things
+  brew cask install \
+    disk-inventory-x \
+    firefox \
+    flux \
+    google-chrome \
+    gpgtools \
+    iterm2 \
+    mactex \
+    vlc
 
-# brew cask install things
-brew cask install \
-  disk-inventory-x \
-  firefox \
-  flux \
-  google-chrome \
-  gpgtools \
-  iterm2 \
-  mactex \
-  vlc
-
-# set global git configs
-git config --global user.name "Steve McCarthy"
-git config --global user.email "steve@redlua.com"
-git config --global push.default simple
-git config --global core.editor "vim"
-
-# setup dotfiles
-ln -s ~/dotfiles/vimrc        .vimrc
-ln -s ~/dotfiles/bash_profile .bash_profile
-ln -s ~/dotfiles/tmux.conf    .tmux.conf
-
-# extra vim setup
-mkdir .vim
-mkdir .vim/vimbackups
-mkdir .vim/vimswaps
-# get and install vim plugins
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
-
-# extra tmux setup
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-tmux source ~/.tmux.conf
-# TODO figure out how to install tmux plugins in this script
-
-# source new .bash_profile
-source ~/.bash_profile
-
-# print reminders
+# print reminders for macos setup
 echo "
 ### Add to / Remove from Dock
 
@@ -133,3 +107,65 @@ Press CMD+SHIFT+H to enter your Home folder in Finder, then press CMD+ArrowUp to
 #### Facetime
 - turn off iphone calls
 "
+}
+
+# Linux
+linux_setup () {
+  sudo apt-get install \
+    neovim \
+    tmux \
+    tig
+}
+
+# Things to install everywhere
+general_setup () {
+  # ensure the directories exist
+  mkdir -p .tmux/plugins
+  mkdir -p .config/nvim/nvimbackups
+  mkdir -p .config/nvim/nvimswaps
+
+  # set global git configs
+  git config --global user.name "Steve McCarthy"
+  git config --global user.email "steve@redlua.com"
+  git config --global push.default simple
+  git config --global core.editor "vim"
+
+  # setup dotfiles
+  ln -fns ~/dotfiles/vimrc        .vimrc
+  ln -fns ~/dotfiles/bash_profile .bash_profile
+  ln -fns ~/dotfiles/tmux.conf    .tmux.conf
+  ln -fns ~/dotfiles/init.vim     .config/nvim/init.vim
+
+  # neovim setup
+  if [ -f "~/.local/share/nvim/site/autoload/plug.vim" ]; then
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  fi
+  nvim +PlugInstall +qall
+
+  # extra tmux setup
+  if [ -d "~/.tmux/tmux-plugins/tpm" ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
+  tmux source ~/.tmux.conf
+  # TODO figure out how to install tmux plugins in this script
+
+  source ~/.bash_profile
+}
+
+# ensure we run this from our home directory
+cd
+
+OS=$(uname)
+case $OS in
+  'Linux')
+    linux_setup
+    ;;
+  'Darwin')
+    macos_setup
+    ;;
+esac
+
+general_setup
+
+echo "we're done!"
