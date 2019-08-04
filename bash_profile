@@ -2,9 +2,11 @@
 export PS1="\[\e[1;30;47m\]\h:\W \u\$\[\e[0m\] "
 
 # this is slow
-# Add homebrew bash completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+# Add homebrew bash completion if it exists
+if [ -x "$(command -v brew)" ]; then
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
 fi
 
 # Turn off homebrew analytics
