@@ -17,11 +17,13 @@ macos_setup () {
 
   # install homebrew things
   brew install \
+    ag \
     bash-completion \
     git \
     go \
     hugo \
     keybase \
+    mosh \
     node \
     postgres \
     python \
@@ -29,7 +31,6 @@ macos_setup () {
     reattach-to-user-namespace \
     rethinkdb \
     sqlite \
-    ag \
     tig \
     tmux \
     vim
@@ -112,9 +113,10 @@ Press CMD+SHIFT+H to enter your Home folder in Finder, then press CMD+ArrowUp to
 # Linux
 linux_setup () {
   sudo apt-get install \
+    mosh \
     neovim \
-    tmux \
-    tig
+    tig \
+    tmux
 }
 
 # Things to install everywhere
