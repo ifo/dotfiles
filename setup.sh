@@ -146,7 +146,7 @@ general_setup () {
   nvim +PlugInstall +qall
 
   # extra tmux setup
-  if [ -d "~/.tmux/tmux-plugins/tpm" ]; then
+  if [ ! -d "~/.tmux/tmux-plugins/tpm" ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
   tmux source ~/.tmux.conf
