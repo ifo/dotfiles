@@ -112,6 +112,7 @@ Press CMD+SHIFT+H to enter your Home folder in Finder, then press CMD+ArrowUp to
 linux_setup () {
   sudo apt-get install \
     fzf \
+    git \
     mosh \
     neovim \
     tig \

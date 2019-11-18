@@ -76,3 +76,5 @@ alias cdgo='cd ~/dev/go/src/github.com/ifo'
 # nvim
 alias n='nvim'
 
+# fzf
+source /usr/share/doc/fzf/examples/key-bindings.bash
