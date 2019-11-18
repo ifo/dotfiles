@@ -19,6 +19,7 @@ macos_setup () {
   brew install \
     ag \
     bash-completion \
+    fzf \
     git \
     go \
     hugo \
@@ -40,10 +41,7 @@ macos_setup () {
     disk-inventory-x \
     firefox \
     flux \
-    google-chrome \
-    gpgtools \
     iterm2 \
-    mactex \
     vlc
 
 # print reminders for macos setup
@@ -113,10 +111,18 @@ Press CMD+SHIFT+H to enter your Home folder in Finder, then press CMD+ArrowUp to
 # Linux
 linux_setup () {
   sudo apt-get install \
+    fzf \
     mosh \
     neovim \
     tig \
     tmux
+
+  if [ -n "$k_flag" ]; then
+    IFS=';' read -ra keys <<< "$k_flag"
+    for key in "${keys[@]}"; do
+      wget "$key" >> ~/.ssh/authorized_keys
+    done
+  fi
 }
 
 # Things to install everywhere
@@ -154,6 +160,20 @@ general_setup () {
 
   source ~/.bash_profile
 }
+
+print_usage () {
+  echo 'Can be run with optional flag -k to add public keys via url to authorized_keys file'
+}
+
+k_flag=''
+
+while getopts 'k:' flag; do
+  case "${flag}" in
+    p) k_flag="${OPTARG}" ;;
+    *) print_usage
+       exit 1 ;;
+  esac
+done
 
 # ensure we run this from our home directory
 cd
