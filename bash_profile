@@ -1,6 +1,3 @@
-# Color bash prompt
-export PS1="\[\e[1;30;47m\]\h:\W \u\$\[\e[0m\] "
-
 # this is slow
 # Add homebrew bash completion if it exists
 if [ -x "$(command -v brew)" ]; then
@@ -11,7 +8,11 @@ fi
 
 # Turn off homebrew analytics
 export HOMEBREW_NO_ANALYTICS=1
+# Ensure homebrew api token isn't set
+unset HOMEBREW_GITHUB_API_TOKEN
 
+# Color bash prompt
+#export PS1="\[\e[1;30;47m\]\h:\W \u\$\[\e[0m\] "
 # Color bash prompt
 PS1_PWD_MAX=15
 __pwd_ps1() { echo -n $PWD | sed -e "s|${HOME}|~|" -e "s|\(/[^/]*/\).*\(/.\{${PS1_PWD_MAX}\}\)|\1...\2|"; }
@@ -26,7 +27,10 @@ PS1='\[\033[01;34m\]$(__pwd_ps1)$(__git_ps1 " \[\033[01;31m\](%s)")$\[\033[00m\]
 export GOPATH=$HOME/dev/go
 export PATH=$PATH:$GOPATH/bin
 export GOBIN=$GOPATH/bin
+export PATH=/usr/local/go/bin:$PATH
 
+# terminal colors
+export TERM=xterm-256color
 
 # ansible inventory file
 export ANSIBLE_INVENTORY=~/dev/ansible/ansible_inventory
@@ -67,12 +71,8 @@ alias gb='go build'
 alias gt='go test'
 alias gtv='go test -v'
 alias gtvr='go test -v -race'
+alias cdgo='cd ~/dev/go/src/github.com/ifo'
 
 # nvim
 alias n='nvim'
 
-# terminal colors
-export TERM=xterm-256color
-
-# ensure homebrew api token isn't set
-unset HOMEBREW_GITHUB_API_TOKEN
