@@ -140,6 +140,10 @@ general_setup () {
   git config --global core.editor "vim"
 
   # setup dotfiles
+  if [ ! -d "~/dotfiles/" ]; then
+    git clone https://github.com/ifo/dotfiles.git
+  fi
+
   ln -fns ~/dotfiles/vimrc        .vimrc
   ln -fns ~/dotfiles/bash_profile .bash_profile
   ln -fns ~/dotfiles/tmux.conf    .tmux.conf
