@@ -121,7 +121,7 @@ linux_setup () {
   if [ -n "$k_flag" ]; then
     IFS=';' read -ra keys <<< "$k_flag"
     for key in "${keys[@]}"; do
-      wget "$key" >> ~/.ssh/authorized_keys
+      wget -O - "$key" >> ~/.ssh/authorized_keys
     done
   fi
 }
@@ -137,10 +137,10 @@ general_setup () {
   git config --global user.name "Steve McCarthy"
   git config --global user.email "steve@redlua.com"
   git config --global push.default simple
-  git config --global core.editor "vim"
+  git config --global core.editor "nvim"
 
   # setup dotfiles
-  if [ ! -d "~/dotfiles/" ]; then
+  if [ -d "~/dotfiles/" ]; then
     git clone https://github.com/ifo/dotfiles.git
   fi
 
@@ -150,14 +150,15 @@ general_setup () {
   ln -fns ~/dotfiles/init.vim     .config/nvim/init.vim
 
   # neovim setup
-  if [ -f "~/.local/share/nvim/site/autoload/plug.vim" ]; then
+  if [ ! -f "~/.local/share/nvim/site/autoload/plug.vim" ]; then
     curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
+
   nvim +PlugInstall +qall
 
   # extra tmux setup
-  if [ ! -d "~/.tmux/tmux-plugins/tpm" ]; then
+  if [ -d "~/.tmux/tmux-plugins/tpm" ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
   tmux source ~/.tmux.conf
