@@ -56,7 +56,7 @@ if [ -f /usr/local/etc/bash_completion.d/tma ]; then
 fi
 
 # Alias ll
-alias ll='ls -alGh'
+alias ll='ls -alh --color=auto'
 
 # cd lists directory contents
 function cd {

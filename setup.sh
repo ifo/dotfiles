@@ -115,6 +115,7 @@ linux_setup () {
     git \
     mosh \
     neovim \
+    ripgrep \
     tig \
     tmux
 
